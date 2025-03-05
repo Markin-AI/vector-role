@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Markin Aleksey
+  description: Ansible Role for Vector installation
+  company: Netology Student
+  license: MIT
+  min_ansible_version: "2.1"
+
+  # platforms:
+  #   - name: Centos
+  #     versions:
+  #       - 7
+  #       - 8
+  #   - name: RHEL
+  #     versions:
+  #       - 7
+  #       - 8
+
+  galaxy_tags: []
+
+dependencies: []

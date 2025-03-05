@@ -1,0 +1,4 @@
+---
+vector_architecture: "x86_64"
+vector_user: vector
+vector_group: vector
