@@ -2,5 +2,5 @@
 vector_version: "0.37.1"
 vector_groups: [systemd-journal]
 vector_data_dir: "/var/lib/vector"
-vector_endpoint_clickhouse: "http://{{ hostvars[groups['clickhouse'][0]].inventory_hostname }}:8123"
+vector_endpoint_clickhouse: "http://localhost:8123"
 vector_endpoint_clickhouse_table: "logs"
