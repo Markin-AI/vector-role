@@ -1,6 +1,8 @@
 galaxy_info:
   author: Markin Aleksey
   description: Ansible Role for Vector installation
+  namespace: markinai
+  role_name: vector
   company: Netology Student
   license: MIT
   min_ansible_version: "2.1"

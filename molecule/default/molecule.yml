@@ -1,0 +1,17 @@
+---
+driver:
+  name: docker
+  lint: |
+   yamllint .
+   ansible-lint
+platforms:
+   - name: fedora
+     image: docker.io/fedorapython/fedora-python-tox
+     pre_build_image: true
+  #  - name: ubuntu_last
+  #    image: docker.io/pycontribs/ubuntu:latest
+  #    pre_build_image: true
+provisioner:
+   name: ansible
+verifier:
+   name: ansible

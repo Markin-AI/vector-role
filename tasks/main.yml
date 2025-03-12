@@ -1,30 +1,27 @@
 ---
-- name: INSTALL | Ensure group "vector" exists
-  become: true
-  ansible.builtin.group:
-    name: "{{ vector_group }}"
-    state: present
-
-- name: INSTALL | Add the user 'vector' with a bash shell, appending the group 'vector' and groups for scraping
-  become: true
-  ansible.builtin.user:
-    name: "{{ vector_user }}"
-    group: "{{ vector_group }}"
-    groups: "{{ vector_groups | default('') }}"
-    shell: /usr/sbin/nologin
-    createhome: true
-    append: true
-
-- name: INSTALL | Install Vector rpm from a remote repo
+- name: Get vector rpm
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.{{ ansible_architecture }}.rpm"
+    dest: "{{ ansible_user_dir }}/vector-{{ vector_version }}.rpm"
+    mode: '0755'
+  when: (ansible_facts.os_family == "RedHat")
+- name: Install vector rpm
   become: true
   ansible.builtin.yum:
-    name: "https://yum.vector.dev/stable/vector-0/{{ ansible_architecture }}/vector-{{ vector_version }}-1.{{ ansible_architecture }}.rpm"
-    state: present
-  notify: restart vector
+    name: "{{ ansible_user_dir }}/vector-{{ vector_version }}.rpm"
+    state: installed
+    disable_gpg_check: true
+  when: ansible_facts.os_family == "RedHat"
 
-- name: CONFIG | Set Vector config from template
+- name: CONFIG | Set Vector config from template 1
+  become: true
   ansible.builtin.template:
     src: vector.j2
     dest: /etc/vector/vector.yaml
     mode: '0755'
-  notify: reload vector
+
+- name: Start vector process
+  ansible.builtin.shell: vector --config /etc/vector/vector.yml >/dev/null 2>&1 &
+  async: 10
+  poll: 0
+  changed_when: false
