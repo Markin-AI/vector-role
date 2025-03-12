@@ -1,5 +1,5 @@
 ---
-data_dir: "/var/lib/vector"
+data_dir: {{ vector_data_dir }}
 
 sources:
   dummy_logs:
@@ -8,13 +8,13 @@ sources:
     interval: 1
 
 sinks:
-  clickhouse:
+  clickhouse_logs:
+    type: clickhouse
     inputs:
       - dummy_logs
-    type: "clickhouse"
-    endpoint: "{{ vector_endpoint_clickhouse }}"
-    database: "logs"
-    table: "{{ vector_endpoint_clickhouse_table }}"
+    database: {{ clickhouse_db }}
+    endpoint: {{ clickhouse_url }}
+    table: {{ clickhouse_table }}
     acknowledgements:
       enabled: false
     healthcheck:

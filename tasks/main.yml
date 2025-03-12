@@ -13,7 +13,7 @@
     disable_gpg_check: true
   when: ansible_facts.os_family == "RedHat"
 
-- name: CONFIG | Set Vector config from template 1
+- name: CONFIG | Set Vector config from template
   become: true
   ansible.builtin.template:
     src: vector.j2

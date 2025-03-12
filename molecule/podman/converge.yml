@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Include role vector
+      ansible.builtin.include_role:
+        name: /home/markin/mnt-homeworks/08-ansible-04-role/playbook/vector-role
