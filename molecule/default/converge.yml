@@ -6,4 +6,6 @@
       include_role:
         name: "vector"
   roles:
-    - role: /opt/jenkins_agent/workspace/freestyle/vector-role
+#    - role: /opt/jenkins_agent/workspace/freestyle/vector-role
+    - role: /home/markin/mnt-homeworks/vector-role
+
