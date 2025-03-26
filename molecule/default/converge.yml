@@ -5,3 +5,5 @@
     - name: "Include vector-role"
       include_role:
         name: "vector"
+  roles:
+    - role: /opt/jenkins_agent/workspace/Freestyle_job/vector-role
